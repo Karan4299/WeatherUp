@@ -23,7 +23,6 @@ const Main = () => {
         tl.to(name,{duration:0,display:"flex"});
         tl.to(name,{duration:.5,delay:1,opacity:1})
         tl.to(name,{duration:.5,delay:1,y:-30});
-        // tl.to(name,{duration:0,display:"none"});
         tl.to(cntrl,{duration:0,delay:.3,display:"flex"});
         tl.to(cntrl,{duration:.3,opacity:1,y:-20});
         tl.to(btn,{duration:0,delay:0,display:"flex"});
@@ -33,9 +32,9 @@ const Main = () => {
 
     const changeTme = (theme) => () => {
         clickedacc();
-        if(theme!=db.theme){
+        if(theme!==db.theme){
             db.changeTheme(theme);
-            let tl = gsap.timeline();
+            // let tl = gsap.timeline();
             
             
             if(theme==="Light"){
@@ -97,6 +96,14 @@ const Main = () => {
                 <Right></Right></React.Fragment>:""};
                 
             </Container>
+
+            {/* <Container className="cont">
+                <React.Fragment><Left></Left>
+                <Right></Right></React.Fragment>
+                
+            </Container> */}
+
+            
             
         </MainBLock>
     )

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import img1 from '../../images/1.jpeg';
 
 export const LeftBlock = styled.div`
     height:100%;
@@ -32,6 +31,9 @@ export const Location = styled.div`
     grid-template-columns: 10% 90%;
     grid-template-rows: 100%;
     opacity: 0;
+    svg{
+        color:red;
+    }
 
     div{
         align-self: center;
@@ -45,6 +47,7 @@ export const Location = styled.div`
     div.City{
         font-weight: bold;
         font-size: 1.8em;
+        color:${props=>props.theme==='Light'?'black':'rgb(192,192,192)'}
     }
 
     @media (max-width:750px){

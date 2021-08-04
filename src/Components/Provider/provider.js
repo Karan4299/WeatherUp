@@ -3,31 +3,35 @@ import MainContext from './providerContext';
 import axios from 'axios';
 
 
+
 const Provider = ({children}) =>{
     const [state,setState] = useState(""); 
     const [temp,setTemp] = useState("C");
     const [theme,setTheme] = useState("Light");
     // const [hour,setHour] = useState();
+
+    const weekdatas = {
+        allmaxwind:0,
+        allminwind : 0,
+        allmaxtemp:0,
+        allmintemp:0,
+        allmaxhumi:0,
+        allminhumi:0,
+        allmaxcloud:0,
+        allmincloud :0,
+        allmaxpress:0,
+        allminpress:0,
+        allmaxuvi:0,
+        allminuvi:0,
+
+    }
     let datas;
     let hours;
     let daily;
     let dailytemp;
     let dailyhigh;
     let dailylow;
-    let allmaxwind=0;
-    let allminwind = 0;
-    let allmaxtemp=0;
-    let allmintemp=0;
-    let allmaxhumi=0;
-    let allminhumi=0;
-    let allmaxcloud=0;
-    let allmincloud =0;
-    let allmaxpress=0;
-    let allminpress=0;
-    let allmaxuvi=0;
-    let allminuvi=0;
 
-    let night=new Date().getHours();
 
     useEffect(()=>{
         axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=12.97623&lon=77.603287&exclude=minutely&appid=bf0104f39cfe79918b4c9b253353ed1e")
@@ -41,75 +45,8 @@ const Provider = ({children}) =>{
     const changeTheme = (theme) =>{
         setTheme(theme);
     }
-    const getTemp = (temprature) => {
-        if(temp==="C"){
-            return temprature-273.15;
-        }else{
-            return  ((temprature - 273.15) * (9/5) + 32);
-        }
-    }
-    console.log(state)
 
 
-    const changeTemp = (cur) => () => {
-        // console.log(cur);
-        if(cur!==temp){
-            setTemp(cur);
-        }
-    }
-
-
-    if(state){
-        hours = state.hourly.filter((item,i)=>{
-            // 
-            if(new Date((item.dt-19800)*1000)>=new Date() 
-            && new Date((item.dt-19800)*1000)<=new Date().setHours(new Date().getHours()+7)){
-                return item
-                // i++;
-            }
-
-        });
-
-        datas = hours.map(item=>{
-            return (""+new Date((item.dt-19800)*1000).getHours()+":00");
-        })
-
-        dailytemp = hours.map(item=>{
-            return(getTemp(item.temp));
-        })
-
-        daily = state.daily.filter((item,i)=>{
-            if(i!==0){
-                return true;
-            }
-        }) 
-
-        
-
-        dailyhigh = daily.map((item,i)=>{
-            allmaxwind = Math.max(parseInt(allmaxwind),parseInt(item.wind_speed))
-            allmaxtemp = Math.max(parseInt(allmaxtemp),parseInt(item.temp.max))
-            allmintemp = allmintemp===0?allmintemp=item.temp.min:Math.min(parseInt(allmintemp),parseInt(item.temp.min))
-            allmaxhumi = Math.max(parseInt(allmaxhumi),parseInt(item.humidity))
-            allmaxpress = Math.max(parseInt(allmaxpress),parseInt(item.pressure))
-            allmaxcloud = Math.max(parseInt(allmaxcloud),parseInt(item.clouds))
-            allmaxuvi = Math.max(parseInt(allmaxuvi),parseInt(item.uvi))
-
-            allminwind = allminwind===0?allminwind=item.wind_speed:Math.min(parseInt(allminwind),parseInt(item.wind_speed))
-            // allmintemp = allmintemp===0?allmintemp=item.wind_speed:Math.min(parseInt(allmintemp),parseInt(item.temp.max))
-            allminhumi = allminhumi===0?allminhumi=item.humidity:Math.min(parseInt(allminhumi),parseInt(item.humidity))
-            allminpress = allminpress===0?allminpress=item.pressure:Math.min(parseInt(allminpress),parseInt(item.pressure))
-            allmincloud = allmincloud===0?allmincloud=item.clouds:Math.min(parseInt(allmincloud),parseInt(item.clouds))
-            allminuvi = allminuvi===0?allminuvi=item.uvi:Math.min(parseInt(allminuvi),parseInt(item.uvi))
-        //    console.log(Math.max(parseInt(allwind),parseInt(item.wind_speed))) 
-            return getTemp(item.temp.max);
-        })
-
-
-        dailylow = daily.map((item,i)=>{
-            return getTemp(item.temp.min);
-        })
-    }
     const icons = {
         "Clouds":{
             icon:theme==="Dark"?<i class="fad fa-cloud-moon" Style="--fa-primary-color: grey; --fa-secondary-color: rgb(233,232,228); --fa-secondary-opacity: 1.0"></i>:<i className="fad fa-cloud"></i>,
@@ -174,10 +111,80 @@ const Provider = ({children}) =>{
     }
 
 
-    
+    const getTemp = (temprature) => {
+        if(temp==="C"){
+            return temprature-273.15;
+        }else{
+            return  ((temprature - 273.15) * (9/5) + 32);
+        }
+    }
+
+
+    const changeTemp = (cur) => () => {
+        // console.log(cur);
+        if(cur!==temp){
+            setTemp(cur);
+        }
+    }
+
+
+    if(state){
+        hours = state.hourly.filter((item,i)=>{
+            // 
+            if(new Date((item.dt-19800)*1000)>=new Date() 
+            && new Date((item.dt-19800)*1000)<=new Date().setHours(new Date().getHours()+7)){
+                return item
+                // i++;
+            }
+            return false;
+
+        });
+
+        datas = hours.map(item=>{
+            return (""+new Date((item.dt-19800)*1000).getHours()+":00");
+        })
+
+        dailytemp = hours.map(item=>{
+            return(getTemp(item.temp));
+        })
+
+        daily = state.daily.filter((item,i)=>{
+            if(i!==0){
+                return true;
+            }
+            return false
+        }) 
+
+        
+
+        dailyhigh = daily.map((item,i)=>{
+            weekdatas.allmaxwind = Math.max(parseInt(weekdatas.allmaxwind),parseInt(item.wind_speed))
+            weekdatas.allmaxtemp = Math.max(parseInt(weekdatas.allmaxtemp),parseInt(item.temp.max))
+            weekdatas.allmintemp = weekdatas.allmintemp===0?weekdatas.allmintemp=item.temp.min:Math.min(parseInt(weekdatas.allmintemp),parseInt(item.temp.min))
+            weekdatas.allmaxhumi = Math.max(parseInt(weekdatas.allmaxhumi),parseInt(item.humidity))
+            weekdatas.allmaxpress = Math.max(parseInt(weekdatas.allmaxpress),parseInt(item.pressure))
+            weekdatas.allmaxcloud = Math.max(parseInt(weekdatas.allmaxcloud),parseInt(item.clouds))
+            weekdatas.allmaxuvi = Math.max(parseInt(weekdatas.allmaxuvi),parseInt(item.uvi))
+
+            weekdatas.allminwind = weekdatas.allminwind===0?weekdatas.allminwind=item.wind_speed:Math.min(parseInt(weekdatas.allminwind),parseInt(item.wind_speed))
+            // allmintemp = allmintemp===0?allmintemp=item.wind_speed:Math.min(parseInt(allmintemp),parseInt(item.temp.max))
+            weekdatas.allminhumi = weekdatas.allminhumi===0?weekdatas.allminhumi=item.humidity:Math.min(parseInt(weekdatas.allminhumi),parseInt(item.humidity))
+            weekdatas.allminpress = weekdatas.allminpress===0?weekdatas.allminpress=item.pressure:Math.min(parseInt(weekdatas.allminpress),parseInt(item.pressure))
+            weekdatas.allmincloud = weekdatas.allmincloud===0?weekdatas.allmincloud=item.clouds:Math.min(parseInt(weekdatas.allmincloud),parseInt(item.clouds))
+            weekdatas.allminuvi = weekdatas.allminuvi===0?weekdatas.allminuvi=item.uvi:Math.min(parseInt(weekdatas.allminuvi),parseInt(item.uvi))
+        //    console.log(Math.max(parseInt(allwind),parseInt(item.wind_speed))) 
+            return getTemp(item.temp.max);
+        })
+
+
+        dailylow = daily.map((item,i)=>{
+            return getTemp(item.temp.min);
+        })
+    }
+
+
 
     const geticon = (weather) =>{
-        // console.log(weather)
         return icons[weather];
     }
 
@@ -186,11 +193,14 @@ const Provider = ({children}) =>{
         return days[day];
     }
 
+
+
+
+
     return(
         <MainContext.Provider 
         value={{theme,changeTheme,dailyhigh,dailylow,daily,state,icons,geticon,temp,hours,datas,getTemp,getDay,changeTemp,dailytemp,
-            allmaxtemp,allmaxuvi,allmaxcloud,allmaxhumi,allmaxtemp,allmintemp,allmaxpress,allmaxwind,
-            allmintemp,allminuvi,allmincloud,allminhumi,allminpress,allminwind}}>
+            weekdatas}}>
             {children}
         </MainContext.Provider>
     )

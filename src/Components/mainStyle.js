@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 
 export const MainBLock = styled.div`
-    background-color: rgb(214,215,219);
+    background-color: ${props=>props.theme==="Light"?'rgb(214,215,219)':'rgb(62,62,62)'};
     height:100vh;
     width:100vw;
     min-height: 600px;
@@ -97,11 +97,12 @@ export const Container = styled.div`
     height:90%;
     width:80%;
     display: none;
+    /* display: grid; */
     grid-template-columns: 30% 70%;
     grid-template-rows: 100%;
     border-radius: 30px;
     overflow: hidden;
-    opacity: 0;
+    /* opacity: 0; */
 
     @media (max-height:800px){
         height:100%;

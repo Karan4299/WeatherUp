@@ -17,6 +17,9 @@ const Right = () => {
     let wbar = useRef();
     let cel =<span>&#8451;</span>;
     let fah = <span>&#8457;</span>;
+    const moon=<i class="fas fa-moon"></i>;
+    const sun = <i class="fas fa-sun"></i>;
+    const weekdatas = db.state?db.weekdatas:"";
     
     const current = db.state?db.state.current:"";
     const daily = db.daily?db.daily[0]:"";
@@ -136,19 +139,6 @@ const Right = () => {
             }
         }
     }
-    // useEffect(()=>{
-    //     console.log(Today)
-    // },[]);
-
-    // useEffect(()=>{
-    //     if(TW==="Today"){
-            
-    //     }
-    // },[TW]);
-
-
-    
-    // console.log(datas)
 
     return(
         <RightBlock theme={db.theme}> 
@@ -161,7 +151,7 @@ const Right = () => {
                     <BarRight className="PopUp" temp={db.temp}>
                         <p onClick={db.changeTemp("C")}>&#8451;</p>
                         <p onClick={db.changeTemp("F")}>&#8457;</p>
-                        <p>KB</p>
+                        <p onClick = {()=>db.theme==="Light"?db.changeTheme("Dark"):db.changeTheme("Light")}>{db.theme==="Light"?moon:sun}</p>
                     </BarRight>
                 </Bar>
                 <ChangeBlock>
@@ -186,8 +176,6 @@ const Right = () => {
                                 </div>
                                 <div className="Sunsetrise chAniT PopUp">
                                     <p>Sunrise & Sunset</p>
-                                    {/* <p>{current?(current.visibility)/1000:""}km</p>
-                                    <p><i class="fad fa-eye" Style="color:orange"></i>&nbsp; WSW</p> */}
                                     <p><i class="fad fa-sunrise" Style="color:orange"></i> &nbsp; {current?(new Date(new Date((current.sunrise-19800)*1000).setHours(new Date((current.sunrise-19800)*1000).getHours()+5)).getHours()+":"+new Date((current.sunrise-19800)*1000).getMinutes()):""}</p>
                                     <p><i class="fad fa-sunset" Style="color:orange"></i>&nbsp; {current?(new Date(new Date((current.sunrise-19800)*1000).setHours(new Date((current.sunset-19800)*1000).getHours()+5)).getHours()+":"+new Date((current.sunset-19800)*1000).getMinutes()):""}</p>
                                 </div>
@@ -220,33 +208,33 @@ const Right = () => {
                             <Cards theme={db.theme}>
                                 <div className="Wind Sunsetrise chAinW PopUp">
                                     <p>Wind Speed</p>
-                                    <p><i class="fad fa-wind" Style="color:blue"></i> &nbsp;{db.allmaxwind!==0?db.allmaxwind:0} <span>km/h</span></p>
-                                    <p><i class="fad fa-wind" Style="color:blue"></i> &nbsp; {db.allminwind!==0?db.allminwind:0} <span>km/h</span></p>
+                                    <p><i class="fad fa-wind" Style="color:blue"></i> &nbsp;{weekdatas!==""?weekdatas.allmaxwind:0} <span>km/h</span></p>
+                                    <p><i class="fad fa-wind" Style="color:blue"></i> &nbsp; {weekdatas!==""?weekdatas.allminwind:0} <span>km/h</span></p>
                                 </div>
                                 <div className="Wind Sunsetrise chAinW PopUp">
                                     <p>Humidity</p>
-                                    <p><i class="fas fa-dewpoint" Style="color:lightblue"></i> &nbsp;{db.allmaxhumi!==0?db.allmaxhumi:0} <span>km/h</span></p>
-                                    <p><i class="fas fa-dewpoint" Style="color:lightblue"></i> &nbsp; {db.allminhumi!==0?db.allminhumi:0} <span>km/h</span></p>
+                                    <p><i class="fas fa-dewpoint" Style="color:lightblue"></i> &nbsp;{weekdatas!==""?weekdatas.allmaxhumi:0} <span>km/h</span></p>
+                                    <p><i class="fas fa-dewpoint" Style="color:lightblue"></i> &nbsp; {weekdatas!==""?weekdatas.allminhumi:0} <span>km/h</span></p>
                                 </div>
                                 <div className="Sunsetrise chAinW PopUp">
                                     <p>Temprature</p>
-                                    <p><i class="fad fa-temperature-up" Style="color:red"></i> &nbsp;{db.allmaxtemp!==0?db.getTemp(db.allmaxtemp).toFixed(2):0} {db.temp==="C"?cel:fah}</p>
-                                    <p><i class="fad fa-temperature-down" Style="color:red"></i> &nbsp; {db.allmintemp!==0?db.getTemp(db.allmintemp).toFixed(2):0} {db.temp==="C"?cel:fah}</p>
+                                    <p><i class="fad fa-temperature-up" Style="color:red"></i> &nbsp;{weekdatas!==""?db.getTemp(weekdatas.allmaxtemp).toFixed(2):0} {db.temp==="C"?cel:fah}</p>
+                                    <p><i class="fad fa-temperature-down" Style="color:red"></i> &nbsp; {weekdatas!==""?db.getTemp(weekdatas.allmintemp).toFixed(2):0} {db.temp==="C"?cel:fah}</p>
                                 </div>
                                 <div className="Humidity Sunsetrise chAinW PopUp">
                                     <p>Cloud</p>
-                                    <p><i class="fas fa-cloud" Style="color:orange"></i> &nbsp;{db.allmaxcloud!==0?db.allmaxcloud:0} <span>km</span></p>
-                                    <p><i class="fas fa-cloud" Style="color:orange"></i> &nbsp; {db.allmincloud!==0?db.allmincloud:0} <span>km</span></p>
+                                    <p><i class="fas fa-cloud" Style="color:orange"></i> &nbsp;{weekdatas!==""?weekdatas.allmaxcloud:0} <span>km</span></p>
+                                    <p><i class="fas fa-cloud" Style="color:orange"></i> &nbsp; {weekdatas!==""?weekdatas.allmincloud:0} <span>km</span></p>
                                 </div>
                                 <div className="Visibility Sunsetrise chAinW PopUp">
                                     <p>Pressure</p>
-                                    <p><i class="fad fa-tire-pressure-warning" Style="color:orange"></i> &nbsp;{db.allmaxcloud!==0?db.allmaxcloud:0} <span>hPa</span></p>
-                                    <p><i class="fad fa-tire-pressure-warning" Style="color:orange"></i> &nbsp; {db.allmincloud!==0?db.allmincloud:0} <span>hPa</span></p>
+                                    <p><i class="fad fa-tire-pressure-warning" Style="color:orange"></i> &nbsp;{weekdatas!==""?weekdatas.allmaxpress:0} <span>hPa</span></p>
+                                    <p><i class="fad fa-tire-pressure-warning" Style="color:orange"></i> &nbsp; {weekdatas!==""?weekdatas.allminpress:0} <span>hPa</span></p>
                                 </div>
                                 <div className="AirQuality Sunsetrise chAinW PopUp">
                                     <p>UVI</p>
-                                    <p><i class="fad fa-sun" Style="color:orange"></i> &nbsp;{db.allmaxuvi!==0?db.allmaxuvi:0}</p>
-                                    <p><i class="fad fa-sun" Style="color:orange"></i> &nbsp; {db.allminuvi!==0?db.allminuvi:0}</p>
+                                    <p><i class="fad fa-sun" Style="color:orange"></i> &nbsp;{weekdatas!==""?weekdatas.allmaxuvi:0}</p>
+                                    <p><i class="fad fa-sun" Style="color:orange"></i> &nbsp; {weekdatas!==""?weekdatas.allminuvi:0}</p>
                                 </div>
                             </Cards>
                         </Highlights>
