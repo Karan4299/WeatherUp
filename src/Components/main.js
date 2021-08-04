@@ -42,7 +42,7 @@ const Main = () => {
                 gsap.to(name,{duration:.2,color:"black"});
                 gsap.to(".lab",{duration:.2,color:"black"});
                 gsap.to(btn,{duration:.2,backgroundColor:"orange",color:"white"});
-            }else{
+            }else if(theme==="Dark"){
                 gsap.to(main,{duration:.2,backgroundColor:"rgb(62,62,62)"});
                 gsap.to(name,{duration:.2,color:"white"});
                 gsap.to(".lab",{duration:.2,color:"white"});
@@ -79,7 +79,7 @@ const Main = () => {
                 <NameInit className="PopUp" ref={el=>name=el}><span>Weather</span><span>.</span></NameInit>
                 <Controller className="PopUp" ref={el=>cntrl=el}>
                     <div>
-                        <input type="radio" id="light" name="fav_language" value="Light"   onChange={changeTme("Light")}/>
+                        <input type="radio" id="light" name="fav_language" value="Light"  onChange={changeTme("Light")}/>
                         <label className="lab" for="light">Light</label>
                     </div>
                     <div>

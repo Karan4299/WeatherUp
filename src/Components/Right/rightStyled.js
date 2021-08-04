@@ -8,6 +8,7 @@ export const RightBlock = styled.div`
     width:100%;
     height:100%;
     background-color: ${props=>props.theme==="Dark"?"rgb(31,31,31)":"rgb(247,246,249)"};
+    transition: all .5s;
     padding:5% 5%;
 
     @media (max-width:1000px){
@@ -42,6 +43,7 @@ export const BarLeft = styled.div`
     flex-direction: row;
     justify-content: space-around;
     color:${props=>props.theme==="Dark"?"rgb(192,192,192)":"black"};
+    transition: all .5s;
     opacity: 0;
 
     
@@ -67,6 +69,7 @@ export const BarLeft = styled.div`
         height: 40%;
         cursor: pointer;
         color: ${props=>props.theme==="Dark"?"grey":"black"};
+        transition: all .5s;
         /* margin-bottom: 5px; */
         /* margin-bottom: 1em; */
 
@@ -134,6 +137,7 @@ export const BarRight = styled.div`
         align-items: center;
         font-size: 1.4em;
         font-weight: bold;
+        transition: all .5s;
 
         :nth-child(1){
             height:3em;
@@ -176,6 +180,7 @@ export const Today = styled.div`
     height: 100%;
     
     display: ${props=>props.current==="Today"?"grid":"none"};
+    transition: all .5s;
     grid-template-columns: 100%;
     grid-template-rows: 35% 65%;
 `;
@@ -198,7 +203,8 @@ export const LineBlock = styled.div`
         justify-content: flex-start;
         font-size: 1.4em;
         font-weight: bold;
-        color:${props=>props.theme==="Dark"?"rgb(192,192,192)":"black"}
+        color:${props=>props.theme==="Dark"?"rgb(192,192,192)":"black"};
+        transition: all .5s;
     }
 `;
 
@@ -223,6 +229,7 @@ export const Highlights = styled.div`
         align-items: flex-start;
         justify-content: center;
         color:${props=>props.theme==="Dark"?"rgb(192,192,192)":"black"};
+        transition: all .5s;
         opacity: 0;
     }
 `;
@@ -413,6 +420,7 @@ export const Week = styled.div`
     width:100%;
     height: 100%;
     display:${props=>props.current==="Week"?"grid":"none"};
+    transition: all .5s;
     /* display: grid; */
     grid-template-columns: 100%;
     grid-template-rows: 40% 60%;

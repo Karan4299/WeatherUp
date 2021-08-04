@@ -5,6 +5,7 @@ export const LeftBlock = styled.div`
     width:100%;
     background-color: ${props=>props.theme==="Dark"?"rgb(48,48,48)":"white"};
     padding:12% 10%;
+    transition: all .5s;
 
     @media (max-width:750px){
         padding:2% 4%;
@@ -47,7 +48,8 @@ export const Location = styled.div`
     div.City{
         font-weight: bold;
         font-size: 1.8em;
-        color:${props=>props.theme==='Light'?'black':'rgb(192,192,192)'}
+        color:${props=>props.theme==='Light'?'black':'rgb(192,192,192)'};
+        transition: all .5s;
     }
 
     @media (max-width:750px){
@@ -95,6 +97,7 @@ export const BarLeftRIght = styled.div`
         font-weight: bold;
         height:3em;
         width:3em;
+        transition: all .5s;
 
         @media (max-width:750px){
             height: 2em;
@@ -145,6 +148,7 @@ export const Logo = styled.div`
     align-items: center;
     font-size: 18em;
     color:${props=>props.color};
+    /* transition: all .5s; */
     opacity: 0;
     i{
         text-shadow: 3px 3px 200px  ${props=>props.color};
@@ -189,6 +193,7 @@ export const Temp = styled.div`
     align-items: center;
     opacity: 0;
     color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+    transition: all .5s;
 
     div.temp{
         font-size: 8em;
@@ -241,11 +246,13 @@ export const Day = styled.div`
     justify-content: flex-start;
     align-items: center;
     opacity: 0;
+    transition: all .5s;
 
     p{
         font-size: 1.7em;
         letter-spacing:.1em;
         color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+        transition: all .5s;
     }
 
     p:last-child{
@@ -289,6 +296,7 @@ export const Weather = styled.div`
     p{
         font-size: 1.7em;
         color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+        transition: all .5s;
     }
 
     p:first-child{
@@ -336,6 +344,7 @@ export const Rain = styled.div`
         /* align-self: center; */
         font-size: 1.7em;
         color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+        transition: all .5s;
     }
 
     p:first-child{
@@ -373,6 +382,7 @@ export const IMG = styled.div`
     justify-content: center;
     padding:1em;
     color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+    transition: all .5s;
 
     @media (max-width:750px){
         display: none;
@@ -381,6 +391,7 @@ export const IMG = styled.div`
     p{  
         font-size: 1em;
         color:${props=>props.theme==="Dark"?'rgb(192,192,192)':'black'};
+        transition: all .5s;
 
         span{
             font-size: 1.4em;
