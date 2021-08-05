@@ -15,6 +15,7 @@ const Main = () => {
     const db = useContext(MainContext);
     const [access,setAcc] =useState(false);
     const [access2,setAcc2] = useState(false);
+    let backcolor =db.theme==="Light"?'rgb(214,215,219)':'rgb(62,62,62)';
 
 
     useEffect(()=>{
@@ -38,7 +39,7 @@ const Main = () => {
             
             
             if(theme==="Light"){
-                gsap.to(main,{duration:.2,backgroundColor:"rgb(214,215,219)"});
+                gsap.to(main,{duration:.2,backgroundColor:backcolor});
                 gsap.to(name,{duration:.2,color:"black"});
                 gsap.to(".lab",{duration:.2,color:"black"});
                 gsap.to(btn,{duration:.2,backgroundColor:"orange",color:"white"});

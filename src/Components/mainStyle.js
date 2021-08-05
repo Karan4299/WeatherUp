@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 
 export const MainBLock = styled.div`
-    background-color: ${props=>props.theme==="Light"?'rgb(214,215,219)':'rgb(62,62,62)'};
+    background-color: ${props=>props.theme==="Light"?'rgb(214,215,219)':'rgb(62,62,62)'} !important;
     transition: all .5s;
     height:100vh;
     width:100vw;
