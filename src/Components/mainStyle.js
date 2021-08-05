@@ -105,7 +105,7 @@ export const Container = styled.div`
     overflow: hidden;
     /* opacity: 0; */
 
-    @media (max-height:800px){
+    @media (max-height:700px){
         height:100%;
         width:90%;
     }
