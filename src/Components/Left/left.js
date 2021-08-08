@@ -5,11 +5,13 @@ import gsap from 'gsap';
 
 
 
-const Left = ( ) => {
+const Left = ( props) => {
     const db = useContext(MainContext);
     const [time,setTime] = useState(""+new Date().getHours()+":"+new Date().getMinutes()+"");
     const current = db.state?db.state.current:"";
     const daily = db.state?db.state.daily:"";
+
+    console.log(db?db.state:"");
     
 
     let cel =<span>&#8451;</span>;
@@ -34,7 +36,8 @@ const Left = ( ) => {
             <Container>
                 <Location theme={db.theme}  className="PopUp">
                     <div className="logo"><i className="fad fa-map-marker-alt"></i></div>
-                    <div theme={db.theme} className="City">Bengaluru</div>
+                    <div theme={db.theme} className="City">{db.curCityname}</div>
+                    <div onClick={props.searchfn(true)} className ="search"><i class="fad fa-search"></i></div>
                 </Location>
                 <BarLeftRIght temp={db.temp} className="PopUp">
                     <p onClick={db.changeTemp("C")}>&#8451;</p>

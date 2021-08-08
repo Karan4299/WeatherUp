@@ -8,6 +8,10 @@ const Provider = ({children}) =>{
     const [state,setState] = useState(""); 
     const [temp,setTemp] = useState("C");
     const [theme,setTheme] = useState("Light");
+    const [curCity,setCity] = useState({"lon":"77.603287","lat":"12.97623"});
+    const [curCityname,setCityName] = useState("Bengaluru");
+    const [allchanged,setAll] = useState("");
+    const [loading,setLoading] = useState(false);
     // const [hour,setHour] = useState();
 
     const weekdatas = {
@@ -34,13 +38,32 @@ const Provider = ({children}) =>{
 
 
     useEffect(()=>{
-        axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=12.97623&lon=77.603287&exclude=minutely&appid=bf0104f39cfe79918b4c9b253353ed1e")
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${curCity.lat}&lon=${curCity.lon}&exclude=minutely&appid=bf0104f39cfe79918b4c9b253353ed1e`)
         .then(data=>{
             // console.log(data.data.hourly)
             // hours = data.data.hourly.filter((item)=>(new Date((item.dt-19800)*1000)>=new Date()));
             return setState(data.data)
         });
     },[]);
+
+    useEffect(()=>{
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${curCity.lat}&lon=${curCity.lon}&exclude=minutely&appid=bf0104f39cfe79918b4c9b253353ed1e`)
+        .then(data=>{
+            // console.log(data.data.hourly)
+            // hours = data.data.hourly.filter((item)=>(new Date((item.dt-19800)*1000)>=new Date()));
+            setState(data.data);setLoading(false)
+        });
+    },[curCity])
+
+    const changecurCitylat = (lon,lat,name) => () =>{
+        setLoading(true);
+        setCityName(name);
+        setCity({
+            "lon":lon,
+            "lat":lat,
+        })
+    }
+    
 
     const changeTheme = (theme) =>{
         setTheme(theme);
@@ -193,13 +216,15 @@ const Provider = ({children}) =>{
         return days[day];
     }
 
+    
+  
 
 
 
 
     return(
         <MainContext.Provider 
-        value={{theme,changeTheme,dailyhigh,dailylow,daily,state,icons,geticon,temp,hours,datas,getTemp,getDay,changeTemp,dailytemp,
+        value={{theme,changeTheme,curCityname,loading,changecurCitylat,dailyhigh,dailylow,daily,state,icons,geticon,temp,hours,datas,getTemp,getDay,changeTemp,dailytemp,
             weekdatas}}>
             {children}
         </MainContext.Provider>

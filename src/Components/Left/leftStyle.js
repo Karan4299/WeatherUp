@@ -29,7 +29,7 @@ export const Container = styled.div`
 export const Location = styled.div`
     /* background-color: rosybrown; */
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 10% 80% 10%;
     grid-template-rows: 100%;
     opacity: 0;
     svg{
@@ -43,6 +43,7 @@ export const Location = styled.div`
     div.logo{
         font-size: 20px;
         color:orange
+        
     }
 
     div.City{
@@ -50,11 +51,23 @@ export const Location = styled.div`
         font-size: 1.8em;
         color:${props=>props.theme==='Light'?'black':'rgb(192,192,192)'};
         transition: all .5s;
+        /* background-color: silver; */
+    }
+
+    div.search{
+        color:orange;
+        font-size: 20px;
+        cursor: pointer;
+
+        @media (max-width:750px){
+            /* justify-self:flex-end; */
+        }
     }
 
     @media (max-width:750px){
         grid-column-start: 1;
         grid-column-end: 1;
+        grid-template-columns: 10% 60% 70%;
     }
 
 `;
