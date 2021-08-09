@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/WeatherUp/static/css/main.31f7ae45.chunk.css",
-    "main.js": "/WeatherUp/static/js/main.d0aa58ed.chunk.js",
-    "main.js.map": "/WeatherUp/static/js/main.d0aa58ed.chunk.js.map",
+    "main.js": "/WeatherUp/static/js/main.0310009d.chunk.js",
+    "main.js.map": "/WeatherUp/static/js/main.0310009d.chunk.js.map",
     "runtime-main.js": "/WeatherUp/static/js/runtime-main.2ced75e6.js",
     "runtime-main.js.map": "/WeatherUp/static/js/runtime-main.2ced75e6.js.map",
-    "static/js/2.25b118a3.chunk.js": "/WeatherUp/static/js/2.25b118a3.chunk.js",
-    "static/js/2.25b118a3.chunk.js.map": "/WeatherUp/static/js/2.25b118a3.chunk.js.map",
+    "static/js/2.2a0616d6.chunk.js": "/WeatherUp/static/js/2.2a0616d6.chunk.js",
+    "static/js/2.2a0616d6.chunk.js.map": "/WeatherUp/static/js/2.2a0616d6.chunk.js.map",
     "static/js/3.5a487dd2.chunk.js": "/WeatherUp/static/js/3.5a487dd2.chunk.js",
     "static/js/3.5a487dd2.chunk.js.map": "/WeatherUp/static/js/3.5a487dd2.chunk.js.map",
     "index.html": "/WeatherUp/index.html",
     "static/css/main.31f7ae45.chunk.css.map": "/WeatherUp/static/css/main.31f7ae45.chunk.css.map",
-    "static/js/2.25b118a3.chunk.js.LICENSE.txt": "/WeatherUp/static/js/2.25b118a3.chunk.js.LICENSE.txt"
+    "static/js/2.2a0616d6.chunk.js.LICENSE.txt": "/WeatherUp/static/js/2.2a0616d6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2ced75e6.js",
-    "static/js/2.25b118a3.chunk.js",
+    "static/js/2.2a0616d6.chunk.js",
     "static/css/main.31f7ae45.chunk.css",
-    "static/js/main.d0aa58ed.chunk.js"
+    "static/js/main.0310009d.chunk.js"
   ]
 }
