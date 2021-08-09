@@ -55,7 +55,8 @@ const Provider = ({children}) =>{
         });
     },[curCity])
 
-    const changecurCitylat = (lon,lat,name) => () =>{
+    const changecurCitylat = (lon,lat,name) =>{
+        // console.log
         setLoading(true);
         setCityName(name);
         setCity({

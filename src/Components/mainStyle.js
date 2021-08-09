@@ -99,13 +99,13 @@ export const Container = styled.div`
     height:90%;
     width:80%;
     /* display: none; */
-    display: grid;
+    display: none;
     grid-template-columns: 30% 70%;
     grid-template-rows: 100%;
     border-radius: 30px;
     overflow: hidden;
     transition: all .5s;
-    /* opacity: 0; */
+    opacity: 0;
 
     @media (max-height:700px){
         height:100%;
@@ -137,8 +137,8 @@ export const SearchBlock = styled.div`
     position:absolute;
     width:100%;
     height:100%;
-    background-color: rgba(0,0,0,.4);
-    display:flex;
+    background-color: rgba(0,0,0,.1);
+    display:none;
     flex-direction: column;
     padding:5% 10%; 
     transition:all .5s;
@@ -152,7 +152,11 @@ export const SearchBlock = styled.div`
     }
 
     @media (max-width:1400px){
-        padding:0% 0%;
+        padding:3% 0%;
+    }
+
+    @media (max-width:750px){
+        padding:1.5% 0%;
     }
 
     
@@ -179,7 +183,7 @@ export const SearchBlock = styled.div`
         }
 
         @media (max-width:500px){
-            width:55%;
+            width:70%;
             height:29%;
         }
         
@@ -193,16 +197,18 @@ export const SearchBlock = styled.div`
 
 export const Bar = styled.div`
     width:100%;
-    height: 9%;
+    height: 5%;
     display: grid;
     grid-template-columns: 80% 20%;
     grid-template-rows: 100%;
     /* background-color: royalblue; */
-    margin-bottom: 5%;
+    margin-bottom: 10px;
 
     @media (max-width:750px){
         height: 20%;
     }
+
+    
 
     /* @media (max-width:500px){
         height: 20%;
@@ -213,10 +219,14 @@ export const Bar = styled.div`
         height:100%;
         width: 100%;
         /* background-color: red; */
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        opacity:0;
+        
+
+        
         
 
         input{
@@ -224,8 +234,12 @@ export const Bar = styled.div`
             height:90%;
             border-radius: 5px;
             /* background-color: rgb(202,202,202); */
+            background: #f9f9fd;
+            box-shadow:  20px 20px 60px #d4d4d7,
+             -20px -20px 60px #ffffff;
             border:none;
             padding:0% 5%;
+            /* margin-right: 10px; */
 
             :focus{
                 outline: none;
@@ -285,7 +299,8 @@ export const Results = styled.div`
     div.ResBlock{
         /* background-color: sandybrown; */
         width: 100%;
-
+        display: flex;
+        flex-direction:column;
         
         
         
@@ -305,6 +320,17 @@ export const Results = styled.div`
             padding:0% 5%;
             font-weight: bold;
             cursor: pointer;
+
+            @media (max-width:1000px){
+                font-size: 1.4em;
+            }
+            @media (max-width:750px){
+                font-size: 1.2em;
+            }
+
+            @media (max-width:500px){
+                font-size: 1.1em;
+            }
         }
     }
 `;

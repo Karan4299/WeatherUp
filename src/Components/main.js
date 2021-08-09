@@ -27,35 +27,36 @@ const Main = () => {
 
     useEffect(()=>{
         console.log(cont)
-        // let tl = gsap.timeline();
-        // tl.to(name,{duration:0,display:"flex"});
-        // tl.to(name,{duration:.5,delay:1,opacity:1})
-        // tl.to(name,{duration:.5,delay:1,y:-30});
-        // tl.to(cntrl,{duration:0,delay:.3,display:"flex"});
-        // tl.to(cntrl,{duration:.3,opacity:1,y:-20});
-        // tl.to(btn,{duration:0,delay:0,display:"flex"});
-        // tl.to(btn,{duration:.3,opacity:1,y:-10});
+        let tl = gsap.timeline();
+        tl.to(name,{duration:0,display:"flex"});
+        tl.to(name,{duration:.5,delay:1,opacity:1})
+        tl.to(name,{duration:.5,delay:1,y:-30});
+        // tl.to(name,{duration:0,display:"none"});
+        tl.to(cntrl,{duration:0,delay:.3,display:"flex"});
+        tl.to(cntrl,{duration:.3,opacity:1,y:-20});
+        tl.to(btn,{duration:0,delay:0,display:"flex"});
+        tl.to(btn,{duration:.3,opacity:1,y:-10});
     },[]);
 
 
     const changeTme = (theme) => () => {
         clickedacc();
-        if(theme!==db.theme){
-            // db.changeTheme(theme);
-            // // let tl = gsap.timeline();
+        if(theme!=db.theme){
+            db.changeTheme(theme);
+            let tl = gsap.timeline();
             
             
-            // if(theme==="Light"){
-            //     gsap.to(main,{duration:.2,backgroundColor:backcolor});
-            //     gsap.to(name,{duration:.2,color:"black"});
-            //     gsap.to(".lab",{duration:.2,color:"black"});
-            //     gsap.to(btn,{duration:.2,backgroundColor:"orange",color:"white"});
-            // }else if(theme==="Dark"){
-            //     gsap.to(main,{duration:.2,backgroundColor:"rgb(62,62,62)"});
-            //     gsap.to(name,{duration:.2,color:"white"});
-            //     gsap.to(".lab",{duration:.2,color:"white"});
-            //     gsap.to(btn,{duration:.2,backgroundColor:"orange"});
-            // }
+            if(theme==="Light"){
+                gsap.to(main,{duration:.2,backgroundColor:"rgb(214,215,219)"});
+                gsap.to(name,{duration:.2,color:"black"});
+                gsap.to(".lab",{duration:.2,color:"black"});
+                gsap.to(btn,{duration:.2,backgroundColor:"orange",color:"white"});
+            }else{
+                gsap.to(main,{duration:.2,backgroundColor:"rgb(62,62,62)"});
+                gsap.to(name,{duration:.2,color:"white"});
+                gsap.to(".lab",{duration:.2,color:"white"});
+                gsap.to(btn,{duration:.2,backgroundColor:"orange"});
+            }
             
         }
     }
@@ -66,20 +67,19 @@ const Main = () => {
 
     const donebtn = () => {
         if(db.state && access2){
-            // let tl = gsap.timeline();
+            let tl = gsap.timeline();
             
-            // tl.to(".PopUp",{duration:.3,delay:.1,opacity:0,y:-40,stagger:.1});
-            // tl.to(init,{duration:0,display:"none"});
-            // tl.to(".cont",{duration:0,display:"grid"})
-            // tl.to(".cont",{duration:1,delay:.2,opacity:1});
-            // // tl.to(cont,{duration:.1,delay:.2,display:"grid"});
+            tl.to(".PopUp",{duration:.3,delay:.1,opacity:0,y:-40,stagger:.1});
+            tl.to(init,{duration:0,display:"none"});
+            tl.to(".cont",{duration:0,display:"grid"})
+            tl.to(".cont",{duration:1,delay:.2,opacity:1});
+            // tl.to(cont,{duration:.1,delay:.2,display:"grid"});
 
-            // setTimeout(()=>{
-            //     setAcc(true);
-            // },1000)
+            setTimeout(()=>{
+                setAcc(true);
+            },1000)
         }
     }
-
     
     const getList = (e) => {
         console.log("adsas")
@@ -108,10 +108,26 @@ const Main = () => {
     const showSearch = (yn) => () => {
         const tl  =gsap.timeline();
         if(yn){
-            // tl.to(".searchAni",{duration:0,display:"flex"})
-            tl.to(".searchAni",{duration:.3,opacity:1,scale:1.01,stagger:.2});
+            console.log("yes");
+            tl.to(".searchAni",{duration:0,display:"flex"})
+            tl.to(".innercon",{duration:.3,display:"flex",opacity:1,scale:1.05,stagger:.2});
+        }else{
+            tl.to(".innercon",{duration:.4,display:"none",opacity:0,scale:0.95,stagger:.2});
+            tl.to(".searchAni",{duration:0,display:"none"})
         }
         setSearch(yn);
+    }
+
+    const selectCity = (long,lat,name) => () => {
+        const tl  =gsap.timeline();
+        console.log(long,lat,name)
+        db.changecurCitylat(long,lat,name)
+        tl.to(".innercon",{duration:.4,display:"none",opacity:0,scale:0.95,stagger:.2});
+
+        setTimeout(()=>{
+            tl.to(".searchAni",{duration:0,display:"none"})
+        },2000);
+        
     }
 
     
@@ -119,7 +135,7 @@ const Main = () => {
 
     return(
         <MainBLock ref={el=>main=el} theme={db.theme}>
-            {/* <Init ref={el=>init=el}>
+            <Init ref={el=>init=el}>
                 <NameInit className="PopUp" ref={el=>name=el}><span>Weather</span><span>.</span></NameInit>
                 <Controller className="PopUp" ref={el=>cntrl=el}>
                     <div>
@@ -134,35 +150,35 @@ const Main = () => {
                 <Btn onClick={donebtn} className="PopUp" ref={el=>btn=el}>
                     {db.state?(access2?"Done":"Choose") :"Loading"}
                 </Btn>
-            </Init> */}
-            {/* <Container className="cont">
-                {access?<React.Fragment><Left></Left>
+            </Init>
+            <Container className="cont">
+                {access?<React.Fragment><Left searchfn={showSearch}></Left>
                 <Right></Right></React.Fragment>:""};
                 
-            </Container> */}
+            </Container>
 
-            <Container className="cont">
+            {/* <Container className="cont">
                 <React.Fragment><Left searchfn={showSearch}></Left>
                 <Right></Right></React.Fragment>
-            </Container>
-            {search?
-            <SearchBlock className="searchAni">
+            </Container> */}
+
+            <SearchBlock className="searchAni" >
                 <div className = "Container">
-                    <Bar className="searchAni">
-                        <div className = "SearchBar">
+                    <Bar >
+                        <div className = "SearchBar innercon">
                             <input ref={el=>textsearch=el} type="text" defaultValue={textsearch.value} placeholder="Search.." onChange={getList} ></input>
                         </div>
-                        <div className = "Cancel searchAni">
+                        <div className = "Cancel innercon ">
                              <i class="fas fa-times"  onClick={showSearch(false)}></i>
                         </div>
                     </Bar>
-                    <Results className="searchAni">
-                        <div className="ResBlock">
+                    <Results >
+                        <div className="ResBlock innercon">
                             {
                                 Object.values(cityList).map((item,i)=>{
                                     // console.log("hello")
                                     return(
-                                        <div className = "CityName" onClick={db.changecurCitylat(item.coord.lon,item.coord.lat,item.name)}  value={item.name}>
+                                        <div className = "CityName " onClick={selectCity(item.coord.lon,item.coord.lat,item.name)}  value={item.name}>
                                             {item.name},{item.country}
                                         </div>
                                     )
@@ -172,16 +188,11 @@ const Main = () => {
                     </Results>
                 </div>
             </SearchBlock>
-            :""}
             {
                 db.loading?<Loading>
                 <CircularProgress color="secondary" />
                 </Loading>:""
             }
-            
-
-            
-            
         </MainBLock>
     )
 }
