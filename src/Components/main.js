@@ -26,7 +26,7 @@ const Main = () => {
 
 
     useEffect(()=>{
-        console.log(cont)
+        // console.log(cont)
         let tl = gsap.timeline();
         tl.to(name,{duration:0,display:"flex"});
         tl.to(name,{duration:.5,delay:1,opacity:1})
@@ -82,7 +82,7 @@ const Main = () => {
     }
     
     const getList = (e) => {
-        console.log("adsas")
+        // console.log("adsas")
         setCur(textsearch.value)
         // console.log();
     }
@@ -91,7 +91,7 @@ const Main = () => {
         // console.log(curName)
         if(curName.length>=3){
             const res =CityList.filter((item,i)=>(item.name.toLowerCase()).includes(curName.toLowerCase()));
-            console.log(res);
+            // console.log(res);
             setList(res);
         }
     }
@@ -108,7 +108,7 @@ const Main = () => {
     const showSearch = (yn) => () => {
         const tl  =gsap.timeline();
         if(yn){
-            console.log("yes");
+            // console.log("yes");
             tl.to(".searchAni",{duration:0,display:"flex"})
             tl.to(".innercon",{duration:.3,display:"flex",opacity:1,scale:1.05,stagger:.2});
         }else{
@@ -120,7 +120,7 @@ const Main = () => {
 
     const selectCity = (long,lat,name) => () => {
         const tl  =gsap.timeline();
-        console.log(long,lat,name)
+        // console.log(long,lat,name)
         db.changecurCitylat(long,lat,name)
         tl.to(".innercon",{duration:.4,display:"none",opacity:0,scale:0.95,stagger:.2});
 
